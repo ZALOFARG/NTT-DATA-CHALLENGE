@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTT DATA Challenge</title>
+</head>
+
+<body>
+  <h1>Aqui se mostrarán las 10 personas luego de hacer el llamado a la API /api/datos</h1>
+  <ul id="lista">
+  </ul>
+
+  <script>
+    fetch('http://localhost:3000/api/datos')
+      .then(res => res.json())
+      .then(data => {
+        const lista = document.getElementById('lista');
+        data.results.entries.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = `${item.API} - ${item.Description}`;
+          lista.appendChild(li);
+        });
+      })
+      .catch(error => {
+        console.error('Error al cargar datos:', error);
+      });
+  </script>
+</body>
+
+</html>
